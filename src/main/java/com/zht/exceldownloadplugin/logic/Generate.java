@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class Generate {
 
-    public static void main(String[] args) {
-        doReadAndWrite("/Users/mac/Desktop/test001.xlsx", "select * from table where exp_id='${exp_id}';", "/Users/mac/Desktop/");
-    }
+//    public static void main(String[] args) {
+//        doReadAndWrite("/Users/mac/Desktop/test001.xlsx", "select * from table where exp_id='${exp_id}';", "/Users/mac/Desktop/");
+//    }
 
     public static String doReadAndWrite(String sourceFile, String template, String targetPath) {
         try {
