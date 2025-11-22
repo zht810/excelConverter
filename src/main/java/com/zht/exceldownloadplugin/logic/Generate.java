@@ -3,6 +3,7 @@ package com.zht.exceldownloadplugin.logic;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.zht.exceldownloadplugin.entity.GenerateResult;
 import com.zht.exceldownloadplugin.entity.ResultModel;
 import com.zht.exceldownloadplugin.utils.RegexUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,23 +17,19 @@ import java.util.Map;
 
 public class Generate {
 
-//    public static void main(String[] args) {
-//         doReadAndWrite("/Users/mac/Desktop/test001.xlsx", "select * from table where exp_id='${exp_id}';", "/Users/mac/Desktop/");
-//    }
-
-    public static String doReadAndWrite(String sourceFile, String template, String targetPath) {
+    public static GenerateResult doReadAndWrite(String sourceFile, String template, String targetPath) {
         try {
             return readAndWrite(sourceFile, template, targetPath);
         } catch (Exception e) {
-            return "生成失败：" + e.getMessage();
+            return GenerateResult.fail("生成失败：" + e.getMessage());
         }
     }
 
-    public static String readAndWrite(String sourceFile, String template, String targetPath) {
+    public static GenerateResult readAndWrite(String sourceFile, String template, String targetPath) {
         // 校验
         String msg = check(sourceFile, template, targetPath);
         if (StringUtils.isNotBlank(msg)) {
-            return msg;
+            return GenerateResult.fail(msg);
         }
 
         // excel表头
@@ -45,7 +42,7 @@ public class Generate {
 
         // 写回excel
         String result = writeResult(dataList, headMap, template, targetPath);
-        return result;
+        return GenerateResult.success(result);
     }
 
     private static void readExcel(String filename, Map<Integer, String> headMap, List<Map<Integer, String>> dataList) {

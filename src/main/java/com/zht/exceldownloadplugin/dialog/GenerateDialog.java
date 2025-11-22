@@ -16,7 +16,7 @@ public class GenerateDialog extends DialogWrapper {
 
     @Override
     public @Nullable JComponent createCenterPanel() {
-        GenerateWindow generateWindow = new GenerateWindow(null);
+        GenerateWindow generateWindow = new GenerateWindow(null, this);
         return generateWindow.getPanel();
     }
 

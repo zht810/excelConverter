@@ -1,35 +1,46 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<!-- 插件配置文件。了解更多：https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.zht.excelDownloadPlugin</id>
+    <!-- 插件的唯一标识符。应该是完全限定名。在插件版本之间不能更改。 -->
+    <id>com.zht.exelConverterTool</id>
 
-    <!-- Public plugin name should be written in Title Case.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>ExcelDownloadPlugin</name>
+    <!-- 公开的插件名称应使用首字母大写格式。
+         指南: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>ExelConverterTool</name>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="zht810@126.com" url="https://www.yourcompany.com">zht</vendor>
+    <!-- 在插件页面上显示的供应商名称或组织ID。 -->
+    <vendor email="zht810@126.com" url="https://www.mycompany.com">zht</vendor>
 
-    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <!-- 在插件页面和IDE插件管理器上显示的插件描述。
+         可以在<![CDATA[ ]]>标签内添加简单的HTML元素（文本格式化、段落和列表）。
+         指南: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+    本插件用于进行excel数据转换，比如excel中有大量数据，每行数据都需要进行拼接处理，配置模板后，会根据模板快速高效的处理。<br>
+    eg：excel文件中有字段name、age<br>模板：update user set score=100 where age >${age};<br>
+    生成结果：update user set score=100 where age > 15;<br>
+    总之，会根据配置的模板，对${...}中字段进行值替换，每一行数据都会进行这个操作，生成一个新的excel。<br>
+    <img src="001.png" alt="图片描述" title="这是一张图片" width="500" height="300"><br>
+    <img src="/img/002.png" alt="图片描述" title="这是一张图片" width="500" height="300"><br>
+    <img src="/img/003.png" alt="图片描述" title="这是一张图片" width="500" height="300"><br>
+    <img src="/img/004.png" alt="图片描述" title="这是一张图片" width="500" height="300"><br>
+
   ]]></description>
 
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <!-- 产品和插件兼容性要求。
+         了解更多：: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <!-- 插件定义的扩展点。
+        了解更多： https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
 
     </extensions>
+
     <actions>
         <action id="ExcelConvertActionId" class="com.zht.exceldownloadplugin.action.ExcelConvertAction"
-                text="exel数据解析转换" description="exel数据解析转换">
+                text="ExelConverterTool" description="excel data convert">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
+
 </idea-plugin>

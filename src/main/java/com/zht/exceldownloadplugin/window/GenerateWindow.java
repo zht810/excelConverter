@@ -5,6 +5,8 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.zht.exceldownloadplugin.dialog.GenerateDialog;
+import com.zht.exceldownloadplugin.entity.GenerateResult;
 import com.zht.exceldownloadplugin.logic.Generate;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,7 +27,7 @@ public class GenerateWindow {
 
     private static final String templateDefault = "请输入模板,eg:update table set kpi='{kpi}' where name='${name}' and age>${age};";
 
-    public GenerateWindow(Project project) {
+    public GenerateWindow(Project project, GenerateDialog generateDialog) {
         mainPanel.setPreferredSize(new Dimension(600, 400));
         templateTa.setText(templateDefault);
 
@@ -76,11 +78,14 @@ public class GenerateWindow {
                     String selectPath = selectFilePath.getText();
                     String template = templateTa.getText();
                     String savaPath = savePathTf.getText();
-
-                    String result = Generate.doReadAndWrite(selectPath, template, savaPath);
-
+                    // 生成excel
+                    GenerateResult generateResult = Generate.doReadAndWrite(selectPath, template, savaPath);
+                    // 成功关闭窗口
+                    if (generateResult.isSuccess()) {
+                        generateDialog.close(0);
+                    }
                     // 弹窗提示
-                    Messages.showMessageDialog(result, "提示", Messages.getInformationIcon());
+                    Messages.showMessageDialog(generateResult.getMsg(), "提示", Messages.getInformationIcon());
                 }
         );
     }
